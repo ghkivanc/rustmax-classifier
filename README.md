@@ -12,4 +12,6 @@ returns dataset,labels
 call classifier.fit(&dataset, &labels, epochs, alpha)
 <h3>4.inference</h3>
 call classifier.infer(&data)
+
+  
 **Im aware this is not exactly a comperhensive documentation however as I stated this is just a pet project**
