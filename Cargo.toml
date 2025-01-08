@@ -1,0 +1,12 @@
+[package]
+name = "softmax"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "my_softmax_classifier"
+path = "src/lib.rs"
+
+[dependencies]
+rand = "0.8.5"
+csv = "1.2"
