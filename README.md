@@ -23,14 +23,13 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-my_softmax_classifier = { path = "path/to/rustmax-classifier" }
+softmax = { path = "path/to/rustmax-classifier" }
 ```
 
-Or if published to crates.io:
+Note: The package name is `softmax`, but the library name is `my_softmax_classifier`, so you'll import it as:
 
-```toml
-[dependencies]
-my_softmax_classifier = "0.1.0"
+```rust
+use my_softmax_classifier::softmax::SoftmaxClassifier;
 ```
 
 ## Quick Start
@@ -280,25 +279,36 @@ for epoch in 0..1000 {
 
 ### Softmax Function
 
-For a sample with features **x** and class weights **w**<sub>k</sub>, the probability of class *k* is:
+For a sample with features **x** and class weights **w_k**, the probability of class *k* is:
 
-P(y = k | **x**) = exp(**w**<sub>k</sub>ᵀ**x**) / Σ<sub>j</sub> exp(**w**<sub>j</sub>ᵀ**x**)
+```
+P(y = k | x) = exp(w_k^T * x) / Σ_j exp(w_j^T * x)
+```
+
+where the sum is over all classes j.
 
 ### Cross-Entropy Loss
 
 The loss function being minimized is the cross-entropy:
 
-L = -1/m Σ<sub>i</sub> Σ<sub>k</sub> y<sub>i,k</sub> log(p<sub>i,k</sub>)
+```
+L = -(1/m) * Σ_i Σ_k y_{i,k} * log(p_{i,k})
+```
 
-where *m* is the number of samples, y<sub>i,k</sub> is 1 if sample *i* belongs to class *k* (0 otherwise), and p<sub>i,k</sub> is the predicted probability.
+where:
+- m is the number of samples
+- y_{i,k} is 1 if sample i belongs to class k (0 otherwise)
+- p_{i,k} is the predicted probability
 
 ### Gradient Descent
 
 Weights are updated using:
 
-**w**<sub>k</sub> := **w**<sub>k</sub> - α ∇<sub>**w**<sub>k</sub></sub>L
+```
+w_k := w_k - α * ∇_{w_k} L
+```
 
-where α is the learning rate and ∇ is the gradient operator.
+where α is the learning rate and ∇ denotes the gradient operator.
 
 ## Performance Considerations
 
