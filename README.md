@@ -23,13 +23,20 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-softmax = { path = "path/to/rustmax-classifier" }
+softmax = { path = "../rustmax-classifier" }  # Adjust path to your local clone
 ```
 
 Note: The package name is `softmax`, but the library name is `my_softmax_classifier`, so you'll import it as:
 
 ```rust
 use my_softmax_classifier::softmax::SoftmaxClassifier;
+```
+
+Alternatively, if you've cloned this repository, you can reference it directly:
+
+```toml
+[dependencies]
+softmax = { path = "/absolute/path/to/rustmax-classifier" }
 ```
 
 ## Quick Start
